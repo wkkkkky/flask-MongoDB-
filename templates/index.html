@@ -1,0 +1,65 @@
+<html lang="en">
+  <head>
+    {% block head %}
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    
+    
+    {% block styles %}
+    <!-- Bootstrap CSS -->
+    {{ bootstrap.load_css() }}
+    {% endblock %}
+
+    <title>新闻首页</title>
+    {% endblock %}
+  </head>
+  <body>
+    <!-- 设置导航 -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="{{ url_for('index') }}">首页</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('cat',name='推荐') }}">推荐</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('cat',name='百家') }}">百家</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('admin') }}">后台</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+        </form>
+      </div>
+    </nav>
+    <!-- Your page content -->
+    {% block content %}
+      <!-- 显示所有新闻 -->
+      {% for obj in news_list %}
+      <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">{{  obj.title  }}</h5>
+          <p class="card-text">{{  obj.content  }}</p>
+          <a href="{{ url_for('detail',pk=obj.id) }}" class="btn btn-primary">详情</a>
+        </div>
+      </div>
+      {% endfor %}
+    {% endblock %}
+
+    
+    {% block scripts %}
+    <!-- Optional JavaScript -->
+    {{ bootstrap.load_js() }}
+    {% endblock %}
+    
+  </body>
+</html>
